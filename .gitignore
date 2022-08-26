@@ -1,52 +1,16 @@
-# Prerequisites
-*.d
+#CMake
+/cmake-build*
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+#Eclipse
+/.settings/**
 
-# Linker output
-*.ilk
-*.map
-*.exp
+#Jetbrains
+/.idea/**
 
-# Precompiled Headers
-*.gch
-*.pch
+#vim
+*.swp
+*.swo
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+#binary
+/build/**
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
