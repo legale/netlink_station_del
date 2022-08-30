@@ -36,7 +36,7 @@ static void usage(void) {
                     "            command: dev | mac | help              \n"
                     "\n"
                     "Example: %s dev wlan0 mac 00:ff:12:a3:e3           \n"
-                    "\n", argv0, argv0, argv0);
+                    "\n", argv0, argv0);
     exit(-1);
 }
 
