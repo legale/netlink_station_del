@@ -35,7 +35,7 @@ static void usage(void) {
                     "Usage:   %s [command value] ... [command value]    \n"
                     "            command: dev | mac | help              \n"
                     "\n"
-                    "Example: %s dev wlan0 mac 00:ff:12:a3:e3           \n"
+                    "Example: %s dev wlan0 mac 00:ff:12:a3:e3:b2        \n"
                     "\n", argv0, argv0);
     exit(-1);
 }
@@ -138,7 +138,6 @@ static int nl80211_cmd_del_station(const char *dev, const char *mac) {
 
     //find the nl80211 driver ID
     nl80211State.nl80211_id = genl_ctrl_resolve(&sk, "nl80211");
-    fprintf(stderr, "nl80211 driver id: %d\n", nl80211State.nl80211_id);
 
     //attach a callback
     nl_socket_modify_cb(&sk, NL_CB_VALID, NL_CB_CUSTOM, nl_cb, NULL);
