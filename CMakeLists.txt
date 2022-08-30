@@ -4,6 +4,7 @@ project(del_sta C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(del_sta
+        station_del.c
         main.c)
 
 include_directories(

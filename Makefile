@@ -18,9 +18,7 @@ CC = gcc
 AR = ar
 
 #SRC=$(wildcard *.c)
-LIBNAME =
-SRC_LIB = main.c
-SRC_BIN = main.c
+SRC_BIN = main.c station_del.c
 SRC = $(SRC_BIN)
 
 all: $(NAME)
