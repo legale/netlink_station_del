@@ -35,7 +35,7 @@ static void usage(void) {
                     "Usage:   %s [command value] ... [command value]    \n"
                     "            command: dev | mac | help              \n"
                     "\n"
-                    "Example: %s dev wlan0 %s mac 00:ff:12:a3:e3        \n"
+                    "Example: %s dev wlan0 mac 00:ff:12:a3:e3           \n"
                     "\n", argv0, argv0, argv0);
     exit(-1);
 }
@@ -99,6 +99,22 @@ static int nl_cb(struct nl_msg *msg, void *arg) {
         fprintf(stderr, "nla_type: %d nla_len: %d\n", tb_msg[i]->nla_type, tb_msg[i]->nla_len);
     }
     return 0;
+}
+
+/* Returns true if 'prefix' is a not empty prefix of 'string'. */
+static bool matches(const char *prefix, const char *string) {
+    if (!*prefix)
+        return false;
+    while (*string && *prefix == *string) {
+        prefix++;
+        string++;
+    }
+    return !*prefix;
+}
+
+static void incomplete_command(void) {
+    fprintf(stderr, "Command line is not complete. Try option \"help\"\n");
+    exit(-1);
 }
 
 static int nl80211_cmd_del_station(const char *dev, const char *mac) {
@@ -176,21 +192,6 @@ static int nl80211_cmd_del_station(const char *dev, const char *mac) {
     return -ENOBUFS;
 }
 
-/* Returns true if 'prefix' is a not empty prefix of 'string'. */
-static bool matches(const char *prefix, const char *string) {
-    if (!*prefix)
-        return false;
-    while (*string && *prefix == *string) {
-        prefix++;
-        string++;
-    }
-    return !*prefix;
-}
-
-static void incomplete_command(void) {
-    fprintf(stderr, "Command line is not complete. Try option \"help\"\n");
-    exit(-1);
-}
 
 int main(int argc, char **argv) {
     int ret;
