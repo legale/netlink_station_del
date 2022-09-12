@@ -3,8 +3,18 @@
 #include <stdbool.h> /* bool, true, false macros */
 #include <unistd.h> /* close() */
 
-#define _GNU_SOURCE
-#include <sys/socket.h> /* to define struct ucred which is used in libnl-tiny headers */
+
+/* to replace include socket.h possible without struct ucred define it here
+#include <sys/socket.h>  //to define struct ucred which is used in libnl-tiny headers
+*/
+#ifndef _struct_ucred
+#define _struct_ucred
+struct ucred {
+    pid_t pid;
+    uid_t uid;
+    gid_t gid;
+};
+#endif /* _struct_ucred */
 
 #include <errno.h> /* printf */
 #include <string.h>
