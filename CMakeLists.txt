@@ -9,7 +9,7 @@ add_executable(del_sta
 
 include_directories(
         /usr/include
-        /usr/include/libnl3
+        /usr/include/libnl-tiny
 )
 
 target_link_libraries(del_sta

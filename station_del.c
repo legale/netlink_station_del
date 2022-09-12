@@ -3,6 +3,9 @@
 #include <stdbool.h> /* bool, true, false macros */
 #include <unistd.h> /* close() */
 
+#define _GNU_SOURCE
+#include <sys/socket.h> /* to define struct ucred which is used in libnl-tiny headers */
+
 #include <errno.h> /* printf */
 #include <string.h>
 #include <time.h>
@@ -11,12 +14,13 @@
 #include <linux/netlink.h> /*netlink macros and structures */
 #include <net/if.h>
 
-/* libnl-3 */
+
+/* libnl-3 libnl-tiny */
 #include <netlink/netlink.h>
 #include <netlink/attr.h>
 #include <netlink/msg.h>
 
-/*libnl-gen-3*/
+/*libnl-gen-3 libnl-tiny */
 #include <netlink/genl/genl.h>
 #include <netlink/genl/ctrl.h>
 
@@ -27,17 +31,7 @@
 #define NL_OWN_PORT (1<<2)
 #define ETH_ALEN 6
 
-struct nl_sock {
-    struct sockaddr_nl s_local;
-    struct sockaddr_nl s_peer;
-    int s_fd;
-    int s_proto;
-    unsigned int s_seq_next;
-    unsigned int s_seq_expect;
-    int s_flags;
-    struct nl_cb *s_cb;
-    size_t s_bufsize;
-};
+
 
 struct nl80211_state {
     struct nl_sock *nl_sock;
