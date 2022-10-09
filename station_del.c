@@ -57,7 +57,7 @@ static int mac_addr_atoi(uint8_t *mac, const char *hex) {
 #if UINTPTR_MAX == UINT64_MAX
         printf("error: wrong len: %lu expected: %lu\n", strlen(hex), sizeof("FF:FF:FF:FF:FF:FF") - 1);
 #else
-        printf("error: wrong len: %lu expected: %llu\n", strlen(hex), sizeof("FF:FF:FF:FF:FF:FF") - 1);
+        printf("error: wrong len: %lu expected: %u\n", strlen(hex), sizeof("FF:FF:FF:FF:FF:FF") - 1);
 #endif
         return 0;
     }
