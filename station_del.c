@@ -18,6 +18,7 @@ struct ucred {
 
 #include <errno.h> /* printf */
 #include <string.h>
+#include <sys/time.h> /* timeval_t struct */
 #include <time.h>
 #include <arpa/inet.h> /* inet_ntop() */
 #include <linux/nl80211.h> /* 802.11 netlink interface */
@@ -112,6 +113,20 @@ int nl80211_cmd_del_station(const char *dev, const char *mac) {
     };
 
     sk.s_fd = socket(AF_NETLINK, SOCK_RAW, NETLINK_GENERIC);
+    if (sk.s_fd < 0) {
+        perror("socket failed");
+        return -1;
+    }
+
+    // set socket timeout 1 sec
+    struct timeval tv;
+    tv.tv_sec = 1;
+    tv.tv_usec = 0;
+    if (setsockopt(sk.s_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
+        perror("setsockopt");
+        return -2;
+    }
+
     nl80211State.nl_sock = &sk;
 
 

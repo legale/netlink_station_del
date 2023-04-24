@@ -11,6 +11,9 @@ LDDIRS += -L$(BD)
 CFLAGS += -Wall -O2
 CFLAGS += -I./
 CFLAGS += -I/usr/include/libnl-tiny
+CFLAGS += -I/usr/local/include/libnl-tiny
+
+CFLAGS += -L/usr/local/lib
 LDFLAGS += -lnl-tiny
 
 #Compiler
