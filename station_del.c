@@ -2,6 +2,7 @@
 #include <stdlib.h> /* exit() */
 #include <stdbool.h> /* bool, true, false macros */
 #include <unistd.h> /* close() */
+#include <fcntl.h>
 
 
 /* to replace include socket.h possible without struct ucred define it here
@@ -118,10 +119,13 @@ int nl80211_cmd_del_station(const char *dev, const char *mac) {
         return -1;
     }
 
-    // set socket timeout 1 sec
-    struct timeval tv;
-    tv.tv_sec = 1;
-    tv.tv_usec = 0;
+    fchmod(sk.s_fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+    // set socket nonblocking flag
+    // int flags = fcntl(sk.s_fd, F_GETFL, 0);
+    // fcntl(sk.s_fd, F_SETFL, flags | O_NONBLOCK);
+
+    // set socket timeout 100ms
+    struct timeval tv = {.tv_sec = 0, .tv_usec = 100000};
     if (setsockopt(sk.s_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
         perror("setsockopt");
         return -2;
