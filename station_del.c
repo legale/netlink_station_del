@@ -25,6 +25,8 @@ struct ucred {
 #include <linux/nl80211.h> /* 802.11 netlink interface */
 #include <linux/netlink.h> /*netlink macros and structures */
 #include <net/if.h>
+#include <sys/stat.h> /* fchmod */
+
 
 
 /* libnl-3 libnl-tiny */
