@@ -4,7 +4,7 @@
 #include <unistd.h> /* close() */
 #include <fcntl.h>
 
-
+#include "syslog.h"
 /* to replace include socket.h possible without struct ucred define it here
 #include <sys/socket.h>  //to define struct ucred which is used in libnl-tiny headers
 */
@@ -58,7 +58,7 @@ struct nl80211_state {
 /* convert hex mac address string FF:FF:FF:FF:FF:FF to 6 binary bytes */
 static int mac_addr_atoi(uint8_t *mac, const char *hex) {
     if (strlen(hex) != sizeof("FF:FF:FF:FF:FF:FF") - 1) {
-        printf("error: wrong len: %zu expected: %zu\n", strlen(hex), sizeof("FF:FF:FF:FF:FF:FF") - 1);
+        syslog2(LOG_ERR, "wrong len: %zu expected: %zu\n", strlen(hex), sizeof("FF:FF:FF:FF:FF:FF") - 1);
         return 0;
     }
     mac[0] = strtol(&hex[0], NULL, 16);
