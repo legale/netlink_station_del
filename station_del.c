@@ -43,7 +43,7 @@ struct ucred {
 
 /* used macros */
 #define NL_OWN_PORT (1<<2)
-#define ETH_ALEN 6
+
 
 
 
@@ -147,7 +147,7 @@ int nl80211_cmd_del_station(const char *dev, const char *mac) {
     if (if_index == 0) if_index = -1;
 
 
-    uint8_t mac_addr[ETH_ALEN];
+    uint8_t mac_addr[IFHWADDRLEN];
     if (!mac_addr_atoi((uint8_t *) &mac_addr, mac)) {
         fprintf(stderr, "invalid mac address\n");
         return 2;
@@ -162,7 +162,7 @@ int nl80211_cmd_del_station(const char *dev, const char *mac) {
     //add message attributes
     NLA_PUT_U32(msg, NL80211_ATTR_IFINDEX, if_index);
 
-    NLA_PUT(msg, NL80211_ATTR_MAC, ETH_ALEN, mac_addr);
+    NLA_PUT(msg, NL80211_ATTR_MAC, IFHWADDRLEN, mac_addr);
 
     //send the message (this frees it)
     ret = nl_send_auto_complete(&sk, msg);
