@@ -1,5 +1,5 @@
 #include <stdio.h> /* printf() */
-#include <stdlib.h> /* exit() */
+#include <stdlib.h> /* exit() strtol() */
 #include <stdbool.h> /* bool, true, false macros */
 #include <unistd.h> /* close() */
 #include <fcntl.h>
