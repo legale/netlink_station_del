@@ -13,7 +13,7 @@
 #include <time.h>        // struct timespec
 #include <unistd.h>      // syscall()
 
-#include "pthread.h" //SET_CURRENT_FUNCTION
+#include "pthread.h"
 
 // global cached mask value
 extern int cached_mask;
@@ -34,7 +34,6 @@ extern int cached_mask;
 #define FUNC_START_DEBUG                      \
   do {                                        \
     if ((cached_mask & LOG_MASK(LOG_INFO))) { \
-      SET_CURRENT_FUNCTION();                 \
       syslog2(LOG_INFO, "");                  \
     }                                         \
   } while (0)

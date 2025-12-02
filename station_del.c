@@ -45,7 +45,9 @@ struct ucred {
 #define NL_OWN_PORT (1<<2)
 
 
-
+#ifndef ETH_ALEN
+#define ETH_ALEN 6
+#endif /* ETH_ALEN */
 
 struct nl80211_state {
     struct nl_sock *nl_sock;
@@ -147,7 +149,7 @@ int nl80211_cmd_del_station(const char *dev, const char *mac) {
     if (if_index == 0) if_index = -1;
 
 
-    uint8_t mac_addr[ETH_ALEN];
+ __attribute__((unused)) uint8_t mac_addr[ETH_ALEN];
     if (!mac_addr_atoi((uint8_t *) &mac_addr, mac)) {
         fprintf(stderr, "invalid mac address\n");
         return 2;
